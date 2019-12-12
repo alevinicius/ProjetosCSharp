@@ -39,6 +39,19 @@ namespace Ex01
                 acc5.UpdateBalance();
                 Console.WriteLine("Update!");
             }
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Account ac1 = new Account(1001, "Alex", 500.0);
+            Account ac2 = new SavingsAccount(1002, "Anna", 500, 0.01);
+
+            ac1.Withdraw(10);
+            ac2.Withdraw(10);
+
+            Console.WriteLine(ac1.Balance);
+            Console.WriteLine(ac2.Balance);
         }
     }
 }
