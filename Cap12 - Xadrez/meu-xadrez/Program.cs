@@ -18,11 +18,7 @@ namespace meu_xadrez
                     try
                     {
                         Console.Clear();
-                        Tela.imprimirTabuleiro(partida.Tab);
-                        Console.WriteLine();
-                        Console.WriteLine("Turno: " + partida.Turno);
-                        Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual); ;
-
+                        Tela.ImprimirPartida(partida);
                         Console.WriteLine();
                         Console.Write("Origem: ");
                         Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
@@ -44,11 +40,21 @@ namespace meu_xadrez
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Erro não catalogado!");
+                        Console.ReadLine();
+                    }
                 }
             }
             catch(TabuleiroException e)
             {
                 Console.WriteLine(e.Message);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Erro não catalogado!");
+                Console.ReadLine();
             }
         }
     }
