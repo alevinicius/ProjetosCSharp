@@ -44,10 +44,14 @@ namespace Ex10
             Console.Write("Listar em ordem alfabética os e-mails dos funcionários com salários superior a: ");
             double salarioRestricao = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
-            IEnumerable<string> listaEmails = funcionarios
-                .Where(f => f.Salario > salarioRestricao)
-                .OrderBy(f => f.Nome)
-                .Select(f => f.Email);
+
+
+            //Fiz a opção 1 e 2 apenas para ter registradas as duas formas, mas eu poderia usar apenas uma delas se 
+            IEnumerable<string> listaEmails;
+            //Opção 1: Utilizar sintaxe semelhante ao SQL
+            listaEmails = from f in funcionarios where f.Salario > salarioRestricao orderby f.Nome select f.Email;
+            //Opção 2: Utilizar lambda normal
+            listaEmails = funcionarios.Where(f => f.Salario > salarioRestricao).OrderBy(f => f.Nome).Select(f => f.Email);
 
             foreach (string email in listaEmails)
             {
@@ -55,7 +59,13 @@ namespace Ex10
             }
             Console.WriteLine();
 
-            double somaSalarios = funcionarios.Where(f => f.Nome[0] == 'M').Sum(f => f.Salario);
+            //Fiz a opção 1 e 2 apenas para ter registradas as duas formas, mas eu poderia usar apenas uma delas se 
+            double somaSalarios;
+            //Opção 1: Utilizar sintaxe semelhante ao SQL
+            somaSalarios = (from f in funcionarios where f.Nome[0] == 'M' select f).Sum(f => f.Salario);
+            //Opção 2: Utilizar lambda normal
+            somaSalarios = funcionarios.Where(f => f.Nome[0] == 'M').Sum(f => f.Salario);
+
             Console.WriteLine("A soma dos salários dos funcionários cujos nomes começam com a letra 'M' é: " 
                 + somaSalarios.ToString("F2", CultureInfo.InvariantCulture));
         }
